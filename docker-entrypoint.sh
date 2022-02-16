@@ -5,7 +5,7 @@ function isenv {
 	env | grep -q "^$1="
 }
 
-MAVEN_REVISION=${DRONE_SEMVER:-${DRONE_BRANCH/\//-}}$(test -z "${DRONE_SEMVER:-}" && echo "-SNAPSHOT" || true)
+MAVEN_REVISION=${DRONE_SEMVER:-0-${DRONE_BRANCH/\//-}}$(test -z "${DRONE_SEMVER:-}" && echo "-SNAPSHOT" || true)
 
 export PROPERTIES=$(env2args dot '<$k>$v</$k>' PLUGIN_PROPERTY_)
 for _env in $(env2args); do export $_env; done
